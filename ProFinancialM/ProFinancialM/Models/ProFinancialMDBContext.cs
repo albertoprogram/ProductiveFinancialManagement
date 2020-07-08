@@ -6,12 +6,14 @@ using System.Web;
 
 namespace ProFinancialM.Models
 {
-    public class ProFinancialMDBContext: DbContext
+    public class ProFinancialMDBContext : DbContext
     {
         public ProFinancialMDBContext()
             : base("ProFinancialMConnectionString2")
         {
 
         }
+
+        public DbSet<CapitalsPhase1> CapitalsPhase1 { get; set; }
     }
 }
