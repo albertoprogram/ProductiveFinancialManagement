@@ -1,0 +1,48 @@
+﻿@model ProFinancialM.Models.CapitalsPhase1
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Concept)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Concept)
+            @Html.ValidationMessageFor(model => model.Concept)
+        </div>
+
+        <div>
+            @Html.Hidden("DateTimeTXN", DateTime.Now)
+        </div>
+
+        <div>
+            @Html.Hidden("Id",0)
+        </div>
+
+        <div>
+            <button id="saveButton" type="submit">Guardar</button>
+        </div>
+    }
+</body>
+</html>

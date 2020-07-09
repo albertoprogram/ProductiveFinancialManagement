@@ -1,4 +1,5 @@
 ﻿using ProFinancialM.Models;
+using ProFinancialM.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,27 @@ namespace ProFinancialM.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    CapitalsPhase1Services capitalsPhase1Services = new CapitalsPhase1Services();
+
+                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1);
+                }
+
+                //return RedirectToAction("Index");
+                //return RedirectToAction("Create");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                string error = ex.Message + " - " + ex.InnerException.ToString();
             }
+            finally
+            {
+
+            }
+
+            return View();
         }
 
         // GET: CapitalsPhase1/Edit/5
