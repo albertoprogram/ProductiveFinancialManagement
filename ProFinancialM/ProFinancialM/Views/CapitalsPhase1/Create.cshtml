@@ -8,8 +8,18 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+
     <title>Create</title>
+
+    @* Referencia a Bootstrap - Las siguientes 4 líneas *@
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+    <link href="~/Scripts/Bootstrap/bootstrap-4.5.0-dist/css/bootstrap.css" rel="stylesheet" />
+
+    @* Referencia a JQuery *@
+    <script src="~/Scripts/jQuery/jquery-3.5.1.min.js"></script>
+
 </head>
 <body>
     @using (Html.BeginForm())
@@ -37,12 +47,18 @@
         </div>
 
         <div>
-            @Html.Hidden("Id",0)
+            @Html.Hidden("Id", 0)
         </div>
 
         <div>
             <button id="saveButton" type="submit">Guardar</button>
         </div>
     }
+
+
+    @* Referencia a Bootstrap - Las siguientes 3 líneas *@
+    <script src="~/Scripts/Bootstrap/bootstrap-4.5.0-dist/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Scripts/Bootstrap/bootstrap-4.5.0-dist/popper.min.js"></script>
+    <script src="~/Scripts/Bootstrap/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
