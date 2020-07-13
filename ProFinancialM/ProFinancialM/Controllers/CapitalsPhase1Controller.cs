@@ -2,6 +2,8 @@
 using ProFinancialM.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,15 +42,45 @@ namespace ProFinancialM.Controllers
                 {
                     CapitalsPhase1Services capitalsPhase1Services = new CapitalsPhase1Services();
 
-                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1);
+                    string errorCompleto;
+                    string errorCopia;
+
+                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1, out errorCompleto);
+
+                    TempData["Exito"] = "Registro insertado con éxito";
+
+                    errorCopia = errorCompleto;
                 }
 
                 //return RedirectToAction("Index");
                 //return RedirectToAction("Create");
             }
-            catch (Exception ex)
+
+            catch (SqlException ex)
             {
-                string error = ex.Message + " - " + ex.InnerException.ToString();
+                if (ex.InnerException?.InnerException is SqlException exSql &&
+                    exSql.Number == 2601)
+                {
+                    TempData["ErrorMensaje"] = "El Producto " + "'" + capitalsPhase1.Amount + "'" + " ya está registrado";
+                }
+
+                else if (ex.InnerException?.InnerException is SqlException exSql2 &&
+                    exSql2.Number == 208)
+                {
+                    TempData["ErrorMensaje"] = "La tabla destino es inválida";
+                }
+                else
+                {
+                    TempData["ErrorMensaje"] = "Error específico SQL no detectado";
+                }
+            }
+            catch (Exception generalException)
+            {
+
+                TempData["ErrorMensaje"] = "Error general";
+
+                //ModelState.AddModelError(string.Empty,
+                //   "An error occured - please contact your system administrator.");
             }
             finally
             {

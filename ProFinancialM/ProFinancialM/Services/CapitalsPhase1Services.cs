@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -11,9 +12,11 @@ namespace ProFinancialM.Services
     public class CapitalsPhase1Services
     {
         #region InsertCapitalPhase1
-        public void InsertCapitalPhase1 (CapitalsPhase1 capitalsPhase1)
+        public void InsertCapitalPhase1(CapitalsPhase1 capitalsPhase1, out string errorCompleto)
         {
-            using(var db = new ProFinancialMDBContext())
+            errorCompleto = string.Empty;
+
+            using (var db = new ProFinancialMDBContext())
             {
                 var idCapPh1 = new SqlParameter
                 {
@@ -84,8 +87,8 @@ namespace ProFinancialM.Services
                     "@errorProcedure OUTPUT," +
                     "@errorLine OUTPUT," +
                     "@errorMessage OUTPUT",
-                    new SqlParameter("@amount",capitalsPhase1.Amount),
-                    new SqlParameter("@concept",capitalsPhase1.Concept),
+                    new SqlParameter("@amount", capitalsPhase1.Amount),
+                    new SqlParameter("@concept", capitalsPhase1.Concept),
                     idCapPh1,
                     error,
                     errorNumber,

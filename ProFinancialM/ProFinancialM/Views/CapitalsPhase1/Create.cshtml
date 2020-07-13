@@ -20,38 +20,87 @@
     @* Referencia a JQuery *@
     <script src="~/Scripts/jQuery/jquery-3.5.1.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                //$(".divMensaje").fadeOut(1500);
+                $("#successMessage").remove();
+            }, 3000);
+
+            setTimeout(function () {
+                //$(".divMensaje").fadeOut(1500);
+                $("#errorMessage").remove();
+            }, 7000);
+
+            //setTimeout(function () {
+            //    $(".content2").fadeIn(1500);
+            //}, 6000);
+        });
+    </script>
+
 </head>
 <body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div>
-            @Html.LabelFor(model => model.Amount)
-        </div>
-        <div>
-            @Html.EditorFor(model => model.Amount)
-            @Html.ValidationMessageFor(model => model.Amount)
-        </div>
+        <!-- ******************* EMPIEZA EL CONTENIDO ******************* -->
 
-        <div>
-            @Html.LabelFor(model => model.Concept)
-        </div>
-        <div>
-            @Html.EditorFor(model => model.Concept)
-            @Html.ValidationMessageFor(model => model.Concept)
-        </div>
+        <div class="container border">
 
-        <div>
-            @Html.Hidden("DateTimeTXN", DateTime.Now)
-        </div>
+            <div class="row">
+                <div>
+                    @if (TempData["ErrorMensaje"] != null)
+                    {
+                        <div class="alert alert-danger" id="errorMessage">
+                            @TempData["ErrorMensaje"]
+                        </div>
+                    }
+                </div>
+            </div>
 
-        <div>
-            @Html.Hidden("Id", 0)
-        </div>
+            <div class="row">
+                <div class="col">
+                    @Html.LabelFor(model => model.Amount)
+                </div>
+                <div class="col">
+                    @Html.EditorFor(model => model.Amount)
+                    @Html.ValidationMessageFor(model => model.Amount)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @Html.LabelFor(model => model.Concept)
+                </div>
+                <div class="col">
+                    @Html.EditorFor(model => model.Concept)
+                    @Html.ValidationMessageFor(model => model.Concept)
+                </div>
+            </div>
+            <div>
+                @Html.Hidden("DateTimeTXN", DateTime.Now)
+            </div>
 
-        <div>
-            <button id="saveButton" type="submit">Guardar</button>
+            <div>
+                @Html.Hidden("Id", 0)
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button id="saveButton" type="submit">Guardar</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    @if (TempData["Exito"] != null)
+                    {
+                        <div class="alert alert-success" id="successMessage">
+                            @TempData["Exito"]
+                        </div>
+                    }
+                </div>
+            </div>
+
         </div>
     }
 
