@@ -44,10 +44,18 @@ namespace ProFinancialM.Controllers
 
                     string errorCompleto;
                     string errorCopia;
+                    bool errorFromSQLServer;
 
-                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1, out errorCompleto);
+                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1, out errorCompleto,out errorFromSQLServer);
 
-                    TempData["Exito"] = "Registro insertado con éxito";
+                    if (errorFromSQLServer == true)
+                    {
+                        TempData["ErrorMensaje"] = "Error general";
+                    }
+                    else
+                    {
+                        TempData["Exito"] = "Registro insertado con éxito";
+                    }
 
                     errorCopia = errorCompleto;
                 }

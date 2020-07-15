@@ -12,7 +12,7 @@ namespace ProFinancialM.Services
     public class CapitalsPhase1Services
     {
         #region InsertCapitalPhase1
-        public void InsertCapitalPhase1(CapitalsPhase1 capitalsPhase1, out string errorCompleto)
+        public void InsertCapitalPhase1(CapitalsPhase1 capitalsPhase1, out string errorCompleto, out bool errorFromSQLServer)
         {
             errorCompleto = string.Empty;
 
@@ -98,6 +98,8 @@ namespace ProFinancialM.Services
                     errorLine,
                     errorMessage
                     );
+
+                errorFromSQLServer = Convert.ToBoolean(error.Value);
             }
         }
         #endregion
