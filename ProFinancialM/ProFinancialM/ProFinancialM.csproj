@@ -121,6 +121,7 @@
     <Compile Include="Models\ProFinancialMDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CapitalsPhase1Services.cs" />
+    <Compile Include="Services\ExceptionHandling.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

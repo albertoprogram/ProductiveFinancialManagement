@@ -42,22 +42,34 @@ namespace ProFinancialM.Controllers
                 {
                     CapitalsPhase1Services capitalsPhase1Services = new CapitalsPhase1Services();
 
-                    string errorCompleto;
-                    string errorCopia;
+                    long idCapPh1FromSQLServer;
                     bool errorFromSQLServer;
+                    int errorNumberFromSQLServer;
+                    int errorSeverityFromSQLServer;
+                    int errorStatusFromSQLServer;
+                    string errorProcedureFromSQLServer;
+                    int errorLineFromSQLServer;
+                    string errorMessageFromSQLServer;
 
-                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1, out errorCompleto,out errorFromSQLServer);
+                    capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1,
+                        out idCapPh1FromSQLServer,
+                    out errorFromSQLServer,
+                    out errorNumberFromSQLServer,
+                    out errorSeverityFromSQLServer,
+                    out errorStatusFromSQLServer,
+                    out errorProcedureFromSQLServer,
+                    out errorLineFromSQLServer,
+                    out errorMessageFromSQLServer);
 
                     if (errorFromSQLServer == true)
                     {
-                        TempData["ErrorMensaje"] = "Error general";
+                        TempData["ErrorMensaje"] = "Error recibido de SQL";
                     }
                     else
                     {
                         TempData["Exito"] = "Registro insertado con éxito";
                     }
 
-                    errorCopia = errorCompleto;
                 }
 
                 //return RedirectToAction("Index");

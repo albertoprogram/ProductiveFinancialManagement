@@ -12,9 +12,16 @@ namespace ProFinancialM.Services
     public class CapitalsPhase1Services
     {
         #region InsertCapitalPhase1
-        public void InsertCapitalPhase1(CapitalsPhase1 capitalsPhase1, out string errorCompleto, out bool errorFromSQLServer)
+        public void InsertCapitalPhase1(CapitalsPhase1 capitalsPhase1, 
+            out long idCapPh1FromSQLServer, 
+            out bool errorFromSQLServer,
+            out int errorNumberFromSQLServer,
+            out int errorSeverityFromSQLServer,
+            out int errorStatusFromSQLServer,
+            out string errorProcedureFromSQLServer,
+            out int errorLineFromSQLServer,
+            out string errorMessageFromSQLServer)
         {
-            errorCompleto = string.Empty;
 
             using (var db = new ProFinancialMDBContext())
             {
@@ -99,7 +106,14 @@ namespace ProFinancialM.Services
                     errorMessage
                     );
 
+                idCapPh1FromSQLServer = Convert.ToInt64(idCapPh1.Value);
                 errorFromSQLServer = Convert.ToBoolean(error.Value);
+                errorNumberFromSQLServer = Convert.ToInt32(errorNumber.Value);
+                errorSeverityFromSQLServer = Convert.ToInt32(errorSeverity.Value);
+                errorStatusFromSQLServer = Convert.ToInt32(errorStatus.Value);
+                errorProcedureFromSQLServer = errorProcedure.Value.ToString();
+                errorLineFromSQLServer = Convert.ToInt32(errorLine.Value);
+                errorMessageFromSQLServer = errorMessage.Value.ToString();
             }
         }
         #endregion
