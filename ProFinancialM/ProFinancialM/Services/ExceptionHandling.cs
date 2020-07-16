@@ -8,6 +8,16 @@ namespace ProFinancialM.Services
 {
     public class ExceptionHandling
     {
+        #region Enviar a controlador para mostrar en consola del browser
+        //private string varTemp1 = AppDomain.CurrentDomain.BaseDirectory;
+
+        //public string propTemp1
+        //{
+        //    get { return varTemp1; }
+        //    set { varTemp1 = value; }
+        //}
+        #endregion
+
         public void HandleSQLException(
             int errorNumberFromSQLServer,
             int errorSeverityFromSQLServer,

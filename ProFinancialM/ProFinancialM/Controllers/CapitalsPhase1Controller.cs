@@ -75,6 +75,12 @@ namespace ProFinancialM.Controllers
 
                         ExceptionHandling exceptionHandling = new ExceptionHandling();
 
+                        //// Se escribe en log del browser
+                        //string msg = exceptionHandling.propTemp1.ToString().Replace("'", ""); //Prevent js parsing errors. Could also add in an escape character instead if you really want the 's.
+                        //msg = msg.Replace("\\", "-");
+                        //Response.Write("<script>console.log(" + "'" + msg + "'" + ");</script>");
+                        //Response.Write("<script>console.log('PRUEBA');</script>");
+
                         exceptionHandling.HandleSQLException(
                             errorNumberFromSQLServer,
                             errorSeverityFromSQLServer,
