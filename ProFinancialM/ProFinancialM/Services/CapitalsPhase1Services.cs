@@ -20,7 +20,9 @@ namespace ProFinancialM.Services
             out int errorStatusFromSQLServer,
             out string errorProcedureFromSQLServer,
             out int errorLineFromSQLServer,
-            out string errorMessageFromSQLServer)
+            out string errorMessageFromSQLServer,
+            out string originClass,
+            out string originMethod)
         {
 
             using (var db = new ProFinancialMDBContext())
@@ -114,6 +116,9 @@ namespace ProFinancialM.Services
                 errorProcedureFromSQLServer = errorProcedure.Value.ToString();
                 errorLineFromSQLServer = Convert.ToInt32(errorLine.Value);
                 errorMessageFromSQLServer = errorMessage.Value.ToString();
+
+                originClass = this.GetType().Name;
+                originMethod = System.Reflection.MethodBase.GetCurrentMethod().Name;
             }
         }
         #endregion

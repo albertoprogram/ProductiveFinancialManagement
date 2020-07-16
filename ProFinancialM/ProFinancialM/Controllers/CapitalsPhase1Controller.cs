@@ -50,6 +50,12 @@ namespace ProFinancialM.Controllers
                     string errorProcedureFromSQLServer;
                     int errorLineFromSQLServer;
                     string errorMessageFromSQLServer;
+                    string originClass;
+                    string originMethod;
+                    string inputValues;
+
+                    inputValues = "Amount=" + capitalsPhase1.Amount.ToString() + " " +
+                        "Concept=" + capitalsPhase1.Concept;
 
                     capitalsPhase1Services.InsertCapitalPhase1(capitalsPhase1,
                         out idCapPh1FromSQLServer,
@@ -59,11 +65,26 @@ namespace ProFinancialM.Controllers
                     out errorStatusFromSQLServer,
                     out errorProcedureFromSQLServer,
                     out errorLineFromSQLServer,
-                    out errorMessageFromSQLServer);
+                    out errorMessageFromSQLServer,
+                    out originClass,
+                    out originMethod);
 
                     if (errorFromSQLServer == true)
                     {
                         TempData["ErrorMensaje"] = "Error recibido de SQL";
+
+                        ExceptionHandling exceptionHandling = new ExceptionHandling();
+
+                        exceptionHandling.HandleSQLException(
+                            errorNumberFromSQLServer,
+                            errorSeverityFromSQLServer,
+                            errorStatusFromSQLServer,
+                            errorProcedureFromSQLServer,
+                            errorLineFromSQLServer,
+                            errorMessageFromSQLServer,
+                            originClass,
+                            originMethod,
+                            inputValues);
                     }
                     else
                     {
